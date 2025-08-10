@@ -1,6 +1,7 @@
-import { Flex, IconButton } from '@chakra-ui/react';
+import { Flex, HStack, IconButton } from '@chakra-ui/react';
 import { ChatGPTMenu } from './ChatGPTMenu';
 import { Avatar } from './components/ui/avatar';
+import { ColorModeButton } from './components/ui/color-mode';
 import { Tooltip } from './components/ui/tooltip';
 import { NewChatIcon, SidebarIcon } from './icons/sidebar-icons';
 import { useSidebarContext } from './sidebar-context';
@@ -31,13 +32,12 @@ export function TopSection() {
       )}
       {sideBarVisible && <ChatGPTMenu />}
 
-      <Avatar
-        name='Esther'
-        size='sm'
-        colorPalette='teal'
-        variant='solid'
-        mr='3'
-      />
+      <HStack>
+        <Tooltip content='Toggle theme' showArrow>
+          <span><ColorModeButton /></span>
+        </Tooltip>
+        <Avatar name='Esther' size='sm' colorPalette='teal' variant='solid' mr='3' />
+      </HStack>
     </Flex>
   );
 }

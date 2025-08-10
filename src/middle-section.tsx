@@ -41,14 +41,22 @@ function PromptButton(props: PromptButtonProps) {
 
 export function MiddleSection() {
   const [inputValue, setInputValue] = useState('');
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') || '' : '';
 
-  const handleInputValue = (e) => {
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
   return (
     <Center flex='1'>
       <VStack gap='6'>
-        <Heading size='3xl'>What can I help with?</Heading>
+        <Heading size='xl' fontWeight='bold'>
+          {username ? (
+            <>Hi {username}! I am Vibhi, your personal exam tutor!</>
+          ) : (
+            <>Hi there, I am Vibhi, your personal exam tutor!</>
+          )}
+        </Heading>
+        <Heading size='3xl' fontWeight='bold'>what can i help you with?</Heading>
         <Center>
           <InputGroup
             minW='768px'

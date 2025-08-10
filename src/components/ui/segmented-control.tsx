@@ -11,6 +11,7 @@ interface Item {
 
 export interface SegmentedControlProps extends SegmentGroup.RootProps {
   items: Array<string | Item>
+  fitted?: boolean
 }
 
 function normalize(items: Array<string | Item>): Item[] {
@@ -24,11 +25,11 @@ export const SegmentedControl = forwardRef<
   HTMLDivElement,
   SegmentedControlProps
 >(function SegmentedControl(props, ref) {
-  const { items, ...rest } = props
+  const { items, fitted, ...rest } = props
   const data = useMemo(() => normalize(items), [items])
 
   return (
-    <SegmentGroup.Root ref={ref} {...rest}>
+    <SegmentGroup.Root ref={ref} width={fitted ? 'full' : undefined} {...rest}>
       <SegmentGroup.Indicator />
       <For each={data}>
         {(item) => (
@@ -36,6 +37,7 @@ export const SegmentedControl = forwardRef<
             key={item.value}
             value={item.value}
             disabled={item.disabled}
+            flex={fitted ? '1' : undefined}
           >
             <SegmentGroup.ItemText>{item.label}</SegmentGroup.ItemText>
             <SegmentGroup.ItemHiddenInput />
